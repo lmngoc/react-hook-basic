@@ -13,9 +13,10 @@ const App = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Hello world react hook <br />
-          {JSON.stringify(Obj)}
+          Hello world react hook
+
         </p>
+        <p style={{ color: "red", marginTop: "20px" }}> {JSON.stringify(Obj)}</p>
 
       </header>
     </div>
