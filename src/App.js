@@ -7,6 +7,9 @@ import Nav from "./views/Nav";
 //babel
 const App = () => {
   let Obj = { name: "Ngoc", channel: "Ngoc channel" }
+  const handleEventClick = (event) => {
+    console.log("click me", event);
+  }
   return (
     <div className="App">
       <Nav />
@@ -17,7 +20,8 @@ const App = () => {
 
         </p>
         <p style={{ color: "red", marginTop: "20px" }}> {JSON.stringify(Obj)}</p>
-
+        <input type='text' value="Ngoc"></input>
+        <button type='button' onClick={(event) => handleEventClick(event)}>Click me</button>
       </header>
     </div>
   );
