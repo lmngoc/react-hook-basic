@@ -1,14 +1,34 @@
 import logo from './logo.svg';
 import './App.css';
 import Nav from "./views/Nav";
+import { useState } from 'react';
+import { eventWrapper } from '@testing-library/user-event/dist/utils';
 
 //template + logic
 //JSX
 //babel
 const App = () => {
-  let Obj = { name: "Ngoc", channel: "Ngoc channel" }
+  let [name, setName] = useState('Ngoc');
+  let [address, setAddress] = useState("");
+  let [todos, setTodos] = useState([
+    { id: 'todo1', title: 'watching youtube' },
+    { id: 'todo1', title: 'doing homework' }
+
+  ]);
+  //let Obj = { name: "Ngoc", channel: "Ngoc channel" }
   const handleEventClick = (event) => {
-    console.log("click me", event);
+    if (!address) {
+      alert('empty input');
+      return;
+    }
+    //hook not merge state
+    // spread syntax array js
+    let newTodo = { id: 'abc', title: address };
+    setTodos([...todos, newTodo]);
+    setAddress('');
+  }
+  const handleOnChange = (event) => {
+    setAddress(event.target.value);
   }
   return (
     <div className="App">
@@ -16,11 +36,21 @@ const App = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Hello world react hook
+          Hello world react hook - {name}
 
         </p>
-        <p style={{ color: "red", marginTop: "20px" }}> {JSON.stringify(Obj)}</p>
-        <input type='text' value="Ngoc"></input>
+        <ul className='todo-container'>
+          {todos.map((todo) => {
+            return (
+              <li className='todo-child' key={todo.id}>{todo.title}</li>
+            )
+          })
+
+          }
+
+        </ul>
+        {/* <p style={{ color: "red", marginTop: "20px" }}> {JSON.stringify(Obj)}</p> */}
+        <input type='text' value={address} onChange={(event) => handleOnChange(event)}></input>
         <button type='button' onClick={(event) => handleEventClick(event)}>Click me</button>
       </header>
     </div>
