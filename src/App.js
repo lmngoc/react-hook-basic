@@ -3,7 +3,7 @@ import './App.css';
 import Nav from "./views/Nav";
 import { useState } from 'react';
 import { eventWrapper } from '@testing-library/user-event/dist/utils';
-
+import Todo from './views/Todo';
 //template + logic
 //JSX
 //babel
@@ -39,16 +39,7 @@ const App = () => {
           Hello world react hook - {name}
 
         </p>
-        <ul className='todo-container'>
-          {todos.map((todo) => {
-            return (
-              <li className='todo-child' key={todo.id}>{todo.title}</li>
-            )
-          })
-
-          }
-
-        </ul>
+        <Todo todos={todos} />
         {/* <p style={{ color: "red", marginTop: "20px" }}> {JSON.stringify(Obj)}</p> */}
         <input type='text' value={address} onChange={(event) => handleOnChange(event)}></input>
         <button type='button' onClick={(event) => handleEventClick(event)}>Click me</button>
