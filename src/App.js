@@ -11,8 +11,9 @@ const App = () => {
   let [name, setName] = useState('Ngoc');
   let [address, setAddress] = useState("");
   let [todos, setTodos] = useState([
-    { id: 'todo1', title: 'watching youtube' },
-    { id: 'todo1', title: 'doing homework' }
+    { id: 'todo1', title: 'watching youtube', type: "ngoc" },
+    { id: 'todo2', title: 'doing homework', type: "su" },
+    { id: 'todo3', title: 'reading book', type: "su" }
 
   ]);
   //let Obj = { name: "Ngoc", channel: "Ngoc channel" }
@@ -23,23 +24,31 @@ const App = () => {
     }
     //hook not merge state
     // spread syntax array js
-    let newTodo = { id: 'abc', title: address };
+
+    let newTodo = { id: Math.floor(Math.random() * 10000 + 1), title: address, type: "ngoc" };
     setTodos([...todos, newTodo]);
     setAddress('');
   }
   const handleOnChange = (event) => {
     setAddress(event.target.value);
   }
+  const deleteDataTodo = (id) => {
+    let currentTodo = todos;
+    currentTodo = currentTodo.filter(item => item.id !== id);
+    setTodos(currentTodo);
+  }
   return (
     <div className="App">
-      <Nav />
+
       <header className="App-header">
+        <Nav />
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Hello world react hook - {name}
 
         </p>
-        <Todo todos={todos} />
+        <Todo todos={todos} title="All title" deleteDataTodo={deleteDataTodo} />
+        <Todo todos={todos.filter(item => item.type === 'ngoc')} title="Ngoc's todos" deleteDataTodo={deleteDataTodo} />
         {/* <p style={{ color: "red", marginTop: "20px" }}> {JSON.stringify(Obj)}</p> */}
         <input type='text' value={address} onChange={(event) => handleOnChange(event)}></input>
         <button type='button' onClick={(event) => handleEventClick(event)}>Click me</button>
