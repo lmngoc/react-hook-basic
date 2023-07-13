@@ -1,9 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
 import Nav from "./views/Nav";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { eventWrapper } from '@testing-library/user-event/dist/utils';
 import Todo from './views/Todo';
+import Covid from './views/Covid';
 //template + logic
 //JSX
 //babel
@@ -16,16 +17,25 @@ const App = () => {
     { id: 'todo3', title: 'reading book', type: "su" }
 
   ]);
+
+  //=didmount
+  useEffect(() => {
+    console.log('run use effect address');
+  }, [address]);
+
+  useEffect(() => {
+    console.log('run use effect todo');
+  }, [todos]);
+
   //let Obj = { name: "Ngoc", channel: "Ngoc channel" }
   const handleEventClick = (event) => {
     if (!address) {
       alert('empty input');
       return;
     }
+    let newTodo = { id: Math.floor(Math.random() * 10000 + 1), title: address, type: "ngoc" };
     //hook not merge state
     // spread syntax array js
-
-    let newTodo = { id: Math.floor(Math.random() * 10000 + 1), title: address, type: "ngoc" };
     setTodos([...todos, newTodo]);
     setAddress('');
   }
@@ -47,11 +57,16 @@ const App = () => {
           Hello world react hook - {name}
 
         </p>
-        <Todo todos={todos} title="All title" deleteDataTodo={deleteDataTodo} />
-        <Todo todos={todos.filter(item => item.type === 'ngoc')} title="Ngoc's todos" deleteDataTodo={deleteDataTodo} />
+
+        <Covid />
         {/* <p style={{ color: "red", marginTop: "20px" }}> {JSON.stringify(Obj)}</p> */}
+        {/* <Todo todos={todos} title="All title" deleteDataTodo={deleteDataTodo} />
+        <Todo todos={todos.filter(item => item.type === 'ngoc')} title="Ngoc's todos" deleteDataTodo={deleteDataTodo} />
+
         <input type='text' value={address} onChange={(event) => handleOnChange(event)}></input>
-        <button type='button' onClick={(event) => handleEventClick(event)}>Click me</button>
+        <button type='button' onClick={(event) => handleEventClick(event)}>Click me</button> */}
+
+
       </header>
     </div>
   );
