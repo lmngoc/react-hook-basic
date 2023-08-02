@@ -5,6 +5,14 @@ import { useState, useEffect } from 'react';
 import { eventWrapper } from '@testing-library/user-event/dist/utils';
 import Todo from './views/Todo';
 import Covid from './views/Covid';
+import { CountDown, NewCountDown } from './views/Countdown';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 //template + logic
 //JSX
 //babel
@@ -47,28 +55,47 @@ const App = () => {
     currentTodo = currentTodo.filter(item => item.id !== id);
     setTodos(currentTodo);
   }
+  const onTimeUp = () => {
+    //alert("on time up");
+  }
   return (
-    <div className="App">
+    <Router>
+      <div className="App">
 
-      <header className="App-header">
-        <Nav />
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Hello world react hook - {name}
+        <header className="App-header">
+          <Nav />
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Hello world react hook - {name}
 
-        </p>
-
-        <Covid />
-        {/* <p style={{ color: "red", marginTop: "20px" }}> {JSON.stringify(Obj)}</p> */}
-        {/* <Todo todos={todos} title="All title" deleteDataTodo={deleteDataTodo} />
-        <Todo todos={todos.filter(item => item.type === 'ngoc')} title="Ngoc's todos" deleteDataTodo={deleteDataTodo} />
-
-        <input type='text' value={address} onChange={(event) => handleOnChange(event)}></input>
-        <button type='button' onClick={(event) => handleEventClick(event)}>Click me</button> */}
+          </p>
 
 
-      </header>
-    </div>
+
+          {/* <p style={{ color: "red", marginTop: "20px" }}> {JSON.stringify(Obj)}</p> */}
+
+        </header>
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path="/" exact>
+            <Covid />
+          </Route>
+          <Route path="/timer">
+            <CountDown onTimeUp={onTimeUp} />
+            <span>----------------</span>
+            <NewCountDown onTimeUp={onTimeUp} />
+          </Route>
+          <Route path="/todo">
+            <Todo todos={todos} title="All title" deleteDataTodo={deleteDataTodo} />
+            <Todo todos={todos.filter(item => item.type === 'ngoc')} title="Ngoc's todos" deleteDataTodo={deleteDataTodo} />
+
+            <input type='text' value={address} onChange={(event) => handleOnChange(event)}></input>
+            <button type='button' onClick={(event) => handleEventClick(event)}>Click me</button>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
