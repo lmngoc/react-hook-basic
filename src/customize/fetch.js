@@ -15,7 +15,7 @@ const useFetch = (url) => {
                 let res = await axios.get(url, {
                     cancelToken: ourRequest.token, // <-- 2nd step
                 });
-                let data = res && res.data && res.data.data ? res.data.data : [];
+                let data = res && res.data ? res.data : [];
 
                 setData(data);
                 setLoading(false);

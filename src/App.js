@@ -6,6 +6,8 @@ import { eventWrapper } from '@testing-library/user-event/dist/utils';
 import Todo from './views/Todo';
 import Covid from './views/Covid';
 import { CountDown, NewCountDown } from './views/Countdown';
+import Blog from './views/Blog';
+import BlogDetail from './views/BlogDetail';
 import {
   BrowserRouter as Router,
   Switch,
@@ -28,11 +30,11 @@ const App = () => {
 
   //=didmount
   useEffect(() => {
-    console.log('run use effect address');
+    // console.log('run use effect address');
   }, [address]);
 
   useEffect(() => {
-    console.log('run use effect todo');
+    //  console.log('run use effect todo');
   }, [todos]);
 
   //let Obj = { name: "Ngoc", channel: "Ngoc channel" }
@@ -65,10 +67,9 @@ const App = () => {
         <header className="App-header">
           <Nav />
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
+          {/* <p>
             Hello world react hook - {name}
-
-          </p>
+          </p> */}
 
 
 
@@ -92,6 +93,12 @@ const App = () => {
 
             <input type='text' value={address} onChange={(event) => handleOnChange(event)}></input>
             <button type='button' onClick={(event) => handleEventClick(event)}>Click me</button>
+          </Route>
+          <Route path="/blog" exact>
+            <Blog />
+          </Route>
+          <Route path="/blog/:id">
+            <BlogDetail />
           </Route>
         </Switch>
       </div>

@@ -7,11 +7,17 @@ const Covid = () => {
     //console.log("today ISO", today.toISOString());
 
     const { data: listUser, loading, error } = useFetch('https://reqres.in/api/users?page=2');
+    let newData = []
+    if (listUser && listUser.length > 0) {
+        newData = listUser.data;
+    }
+
+
 
     return (
         <>
             <table id="customers">
-                {console.log('çheck data user', listUser)}
+                {console.log('çheck data user', newData)}
                 <thead>
                     <tr>
                         <th>First Name</th>
@@ -20,7 +26,7 @@ const Covid = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {error === false && loading === false && listUser && listUser.length > 0 && listUser.map((item) => {
+                    {error === false && loading === false && newData && newData.length > 0 && newData.map((item) => {
                         return (
                             <tr key={item.id}>
                                 <td>{item.first_name}</td>
