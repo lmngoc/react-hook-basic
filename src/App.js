@@ -1,5 +1,6 @@
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+
 import Nav from "./views/Nav";
 import { useState, useEffect } from 'react';
 import { eventWrapper } from '@testing-library/user-event/dist/utils';
